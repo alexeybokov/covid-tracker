@@ -21,7 +21,8 @@ export const fetchData = async (country) => {
 
     return modifiedData;
   } catch (error) {
-    
+    // throw new Error(`Could not fetch ${url}` +
+    //             `, receive ${error.status}`)
   }
 }
 
@@ -37,7 +38,7 @@ export const fetchDailyData = async () => {
 
     return modifiedData;
   } catch (error) {
-    
+
   }
 }
 
@@ -46,6 +47,21 @@ export const fetchCountries = async () => {
     const { data: { countries }} = await axios.get(`${url}/countries`);
 
     return countries.map((country) => country.name)
+  } catch (error) {
+
+  }
+}
+
+export const fetchDailyDelta = async () => {
+  try {
+    const { data } = await axios.get(`${url}/daily`);
+
+    const modifiedData = data.map((dailyData) => ({
+      confirmed: dailyData.deltaConfirmed,
+      date: dailyData.reportDate
+    }))
+
+    return modifiedData;
   } catch (error) {
 
   }

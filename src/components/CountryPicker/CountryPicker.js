@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NativeSelect, FormControl } from "@material-ui/core";
-
 import { fetchCountries } from "../../services/covid-api-service";
-
 import styles from './CountryPicker.module.css';
 
 const CountryPicker = ({ handleCountryChange }) => {

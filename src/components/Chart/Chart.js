@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Line, Bar } from "react-chartjs-2";
-import { fetchDailyData } from "../../services/covid-api-service";
-
+import { fetchDailyData, fetchDailyDelta } from "../../services/covid-api-service";
 import styles from "./Chart.module.css";
 
-const Charts = ({ data: { confirmed, recovered, deaths }, country }) => {
+const Charts = ({ data: { confirmed, recovered, deaths, active }, country, chartOption }) => {
   const [dailyData, setDailyData] = useState([]);
+  const [dailyDelta, setDailyDelta] = useState([]);
 
   useEffect(() => {
     const fetchAPI = async () => {
       setDailyData(await fetchDailyData());
+      setDailyDelta(await fetchDailyDelta());
     }
 
     fetchAPI();
@@ -48,7 +49,8 @@ const Charts = ({ data: { confirmed, recovered, deaths }, country }) => {
               backgroundColor: [
                 'rgba(0, 0, 255, 0.5)',
                 'rgba(0, 255, 0, 0.5)',
-                'rgba(255, 0, 0, 0.5)'
+                'rgba(255, 0, 0, 0.5)',
+                // 'rgba(255, 0, 0, 0.5)'
               ],
               data: [
                 confirmed.value,
@@ -67,9 +69,25 @@ const Charts = ({ data: { confirmed, recovered, deaths }, country }) => {
 
   );
 
+  const dailyDeltaChart = (
+      dailyDelta.length !== 0
+      ? (
+        <Line
+          data={{
+            labels: dailyDelta.map(({ date }) => date),
+            datasets: [{
+              data: dailyDelta.map(({ confirmed }) => confirmed ),
+              label: 'infected',
+              borderColor: '#3333ff',
+              fill: true
+            }]
+          }}
+        />) : null
+  );
+
   return (
     <div className={styles.container}>
-      {country ? barChart : lineChart}
+      {chartOption === "all" ? (country ? barChart : lineChart) : dailyDeltaChart}
     </div>
   )
 }

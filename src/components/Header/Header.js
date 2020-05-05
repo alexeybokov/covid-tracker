@@ -1,15 +1,22 @@
 import React from "react";
-import { AppBar, IconButton, Toolbar, FormControlLabel } from "@material-ui/core";
-import Brightness3Icon from '@material-ui/icons/Brightness4';
+
+import { AppBar, Toolbar } from "@material-ui/core";
+import Brightness4Icon from '@material-ui/icons/Brightness4';
+import Brightness5Icon from '@material-ui/icons/Brightness5';
 
 import styles from "./Header.module.css";
 
-const Header = ({ switchTheme }) => {
+const Header = ({ switchTheme, theme }) => {
   return (
     <AppBar position="static">
       <Toolbar>
         <div className={styles.iconContainer}>
-          <Brightness3Icon onClick={(e) => switchTheme()}/>
+          {theme === 'light' ?
+            <Brightness4Icon
+              onClick={(e) => switchTheme()}/> :
+            <Brightness5Icon
+              onClick={(e) => switchTheme()}
+              color="action" />}
         </div>
       </Toolbar>
     </AppBar>

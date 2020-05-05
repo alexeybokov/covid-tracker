@@ -38,12 +38,10 @@ export default class App extends Component {
       palette: {type: this.state.theme}
     });
 
-    console.log(this.state)
-
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Header switchTheme={this.switchTheme}/>
+        <Header switchTheme={this.switchTheme} theme={this.state.theme}/>
         <div className={styles.container} >
           <img className={styles.image} src={coronaImage} alt="COVID-19"/>
           <Cards data={data}/>

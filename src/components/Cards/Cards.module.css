@@ -18,8 +18,20 @@
   border-bottom: 10px solid rgba(255, 0, 0, 0.5);
 }
 
+.active {
+  border-bottom: 10px solid rgb(227,86,21);
+}
+
+.cardContainer {
+  flex-wrap: nowrap !important;
+}
+
 @media (max-width: 770px) {
   .card {
     margin: 2% 0 !important;
+  }
+
+  .cardContainer {
+    flex-wrap: wrap !important;
   }
 }

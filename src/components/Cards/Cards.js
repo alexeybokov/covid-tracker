@@ -11,13 +11,15 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
     return <CircularProgress color="inherit" size="100px" />
   }
 
+  const active = confirmed.value - recovered.value - deaths.value;
+
   return(
     <div className={styles.container}>
-      <Grid container spacing={3} justify="center" >
+      <Grid container spacing={3} justify="center" className={styles.cardContainer}>
         <Grid
           item component={Card}
           xs={12}
-          md={3}
+          md={4}
           className={cx(styles.card, styles.infected)} >
           <CardContent>
             <Typography color="textSecondary" gutterBottom>Infected</Typography>
@@ -34,7 +36,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
         <Grid
           item component={Card}
           xs={12}
-          md={3}
+          md={4}
           className={cx(styles.card, styles.recovered)}>
           <CardContent>
             <Typography color="textSecondary" gutterBottom>Recovered</Typography>
@@ -51,7 +53,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
         <Grid
           item component={Card}
           xs={12}
-          md={3}
+          md={4}
           className={cx(styles.card, styles.deaths)}>
           <CardContent>
             <Typography color="textSecondary" gutterBottom>Deaths</Typography>
@@ -63,6 +65,23 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
             </Typography>
             <Typography color="textSecondary" gutterBottom>{new Date(lastUpdate).toDateString()}</Typography>
             <Typography variant="body2">Number of deaths caused by COVID-19</Typography>
+          </CardContent>
+        </Grid>
+        <Grid
+          item component={Card}
+          xs={12}
+          md={4}
+          className={cx(styles.card, styles.active)}>
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>Active</Typography>
+            <Typography variant="h5">
+              <CountUp start={0}
+                       end={active}
+                       duration={2.5}
+                       separator="." />
+            </Typography>
+            <Typography color="textSecondary" gutterBottom>{new Date(lastUpdate).toDateString()}</Typography>
+            <Typography variant="body2">Number of active cases COVID-19</Typography>
           </CardContent>
         </Grid>
       </Grid>

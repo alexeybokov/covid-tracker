@@ -24,7 +24,8 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
           <CardContent>
             <Typography color="textSecondary" gutterBottom>Infected</Typography>
             <Typography variant="h5">
-              <CountUp start={0}
+              <CountUp
+                start={0}
                 end={confirmed.value}
                 duration={2.5}
                 separator="." />
@@ -44,7 +45,14 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
               <CountUp start={0}
                        end={recovered.value}
                        duration={2.5}
+                       suffix={' '}
                        separator="." />
+              <CountUp
+                start={0}
+                end={recovered.value*100/confirmed.value}
+                prefix={"("}
+                suffix={' %)'}
+                duration={5}/>
             </Typography>
             <Typography color="textSecondary" gutterBottom>{new Date(lastUpdate).toDateString()}</Typography>
             <Typography variant="body2">Number of recoveries from COVID-19</Typography>
@@ -61,7 +69,14 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
               <CountUp start={0}
                        end={deaths.value}
                        duration={2.5}
+                       suffix={' '}
                        separator="." />
+              <CountUp
+                start={0}
+                end={deaths.value*100/confirmed.value}
+                prefix={"("}
+                suffix={' %)'}
+                duration={5}/>
             </Typography>
             <Typography color="textSecondary" gutterBottom>{new Date(lastUpdate).toDateString()}</Typography>
             <Typography variant="body2">Number of deaths caused by COVID-19</Typography>
@@ -78,7 +93,14 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
               <CountUp start={0}
                        end={active}
                        duration={2.5}
+                       suffix={' '}
                        separator="." />
+              <CountUp
+                start={0}
+                end={active*100/confirmed.value}
+                prefix={"("}
+                suffix={' %)'}
+                duration={5} />
             </Typography>
             <Typography color="textSecondary" gutterBottom>{new Date(lastUpdate).toDateString()}</Typography>
             <Typography variant="body2">Number of active cases COVID-19</Typography>

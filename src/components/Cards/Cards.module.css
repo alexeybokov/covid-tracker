@@ -26,6 +26,10 @@
   flex-wrap: nowrap !important;
 }
 
+.percentValue {
+  opacity: 0.4;
+}
+
 @media (max-width: 770px) {
   .card {
     margin: 2% 0 !important;

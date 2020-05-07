@@ -48,6 +48,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
                        suffix={' '}
                        separator="." />
               <CountUp
+                className={styles.percentValue}
                 start={0}
                 end={recovered.value*100/confirmed.value}
                 prefix={"("}
@@ -72,6 +73,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
                        suffix={' '}
                        separator="." />
               <CountUp
+                className={styles.percentValue}
                 start={0}
                 end={deaths.value*100/confirmed.value}
                 prefix={"("}
@@ -96,6 +98,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
                        suffix={' '}
                        separator="." />
               <CountUp
+                className={styles.percentValue}
                 start={0}
                 end={active*100/confirmed.value}
                 prefix={"("}

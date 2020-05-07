@@ -3,6 +3,7 @@ import { Header, Cards, Chart, CountryPicker, ErrorIndicator } from "./component
 import { fetchData } from "./services/covid-api-service";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {createMuiTheme, ThemeProvider, Typography} from "@material-ui/core";
+import ScrollableAnchor, { goToAnchor } from 'react-scrollable-anchor'
 import styles from "./App.module.css";
 import coronaImage from "./images/corona.png";
 
@@ -23,8 +24,10 @@ export default class App extends Component {
 
   handleCountryChange = async (country) => {
     const fetchedData = await fetchData(country);
-
     this.setState({ data: fetchedData, country: country });
+    if(country) {
+      goToAnchor('chart');
+    }
   }
 
   switchTheme = () => {
@@ -65,6 +68,7 @@ export default class App extends Component {
                 {chartOption === 'all' ? 'Show daily dynamic of new cases in world' : 'Show cases in countries'}
               </Typography>}
             <Chart data={data} country={country} chartOption={chartOption} />
+            <ScrollableAnchor id={'chart'}><div /></ScrollableAnchor>
           </div>}
       </ThemeProvider>
     );
